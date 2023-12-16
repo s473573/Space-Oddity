@@ -6,45 +6,68 @@
 
 \geometry{a4paper, margin=1in}
 
-\title{\Space Oddity\\ Project Vision Document}
+\title{Space Pizza: Galactic Grooves}
 \author{Eduard Pokhylko & Co.}
 \date{\today}
 
 \begin{document}
-\maketitle
+\section{Introduction}
+This document outlines the project proposal for "Space Pizza Delivery," a computer graphics endeavor inspired by the aesthetics of 2000s games, particularly Jet Set Radio. The game involves a spacecraft on a mission to deliver pizzas to cartoonish planets within a stylized, simplified cosmic environment.
 
-\section*{Introduction}
-Briefly introduce the Interstellar Odyssey project, its objectives, and the team members involved.
+\section{Overview}
+\subsection{Objective}
+The primary goal of the game is to efficiently transport pizzas from a space pizza cafes to various planets  across the solar system. Players will accumulate points based on successful and timely deliveries.
 
-\section*{Project Overview}
-Provide an overview of the interactive 3D space flight simulator. Describe the main features, goals, and target audience.
+\subsection{Visual Style}
+Taking cues from the graphical style of Jet Set Radio, the game features a cartoonish and simplified aesthetic. However, it is important to us to fully implement all of the useful visual features of advanced OpenGL. Expect vivid colors, stylized environments, and an overall 2000's ambiance.
 
-\section*{Application Theme}
-Outline the theme of the application, including the storyline, scenes, and ways of interacting with the environment.
+\subsection{Game World}
+The game is set in a vast, whimsical solar system where individual cosmic objects serve as unique delivery destinations. The planetary scale is exaggerated to enhance the fantastical and playful atmosphere.
 
-\section*{Graphics Techniques}
-Detail how advanced computer graphics techniques, such as quaternions, normal mapping, PBR, bloom, parallel transport frames, and others, will be incorporated into the project.
+\subsection{Music}
+An important part of the experience is the presence of a hip soundtrack that complements the funny adventure. The music reflects the overall style of the game, contributing to an engaging gaming experience.
 
-\section*{Chosen CG Method}
-Specify the additional CG method chosen for achieving 100% marks and its relevance to the project.
+\subsection{Mission Structure}
+While the final mission remains undisclosed, players will engage in a series of progressively challenging pizza deliveries. Successful completion of each delivery brings them closer to uncovering the overarching narrative, adding an element of suspense and progression.
 
-\section*{Presentation Topic}
-Briefly describe the CG method or your team's proposed idea for the 7-minute presentation to the class.
+\pagebreak
+
+\section{Graphics Techniques}
+First and foremost, the implementation of CelShading, to define visual style.
+Sprite rendering to support an informative GUI.
+\begin{itemize}
+    \item \textbf{Cel-shading:} Utilizing cel-shading technique to define a distinct rendering style. This involves outlining objects with bold, stylized lines to emulate a hand-drawn appearance.
+  
+    \item \textbf{Sprite Rendering:} Implementing sprite rendering for an informative GUI. This technique enables efficient rendering of textured 2D images in a 3D environment, contributing to the game's overall visual charm.
+    
+    \item \textbf{Physically Based Rendering (PBR):} Implementing PBR to achieve more realistic lighting and material properties. PBR simulates the interaction of light with surfaces based on their physical properties, enhancing the visual fidelity of materials.
+
+    \item \textbf{Bloom:} Applying a bloom effect to enhance the visual appeal!
+  
+    \item \textbf{Normal Mapping:} Utilizing normal mapping to enhance surface details by simulating finer geometry without the need for additional polygons.
+
+    \item \textbf{Parallel transport frames:} WIP.
+
+\end{itemize}
+
+\section{Chosen CG Method}
+\subsection*{Volumetric Light Scattering}
+Exploring the option of volumetric light scattering to simulate lighting effects through atmospheric elements. In other words, an effect present after consuming pizza (green fog around the planet)
 
 \section*{Visual Appeal}
-Highlight the focus on achieving visual appeal through realistic lighting, shadows, reflections, and high-quality textures.
+WIP.
 
 \section*{Interactivity}
-Describe how the simulator will offer engaging gameplay, including dynamic ship control, interaction with the environment, and potential missions or challenges.
-
-\section*{Application Correctness and Complexity}
-Outline the criteria for evaluating the correctness and complexity of the application code, emphasizing the correct implementation of computer graphics methods.
+WIP.
 
 \section*{Timeline}
-Provide a high-level timeline for the project, indicating major milestones and deadlines.
+For now, the project is in the stage of conception. We are working on creating a theme and general idea.
 
 \section*{Conclusion}
-Summarize the overall vision for the Interstellar Odyssey project, emphasizing its uniqueness and potential impact.
+TO BE DONE IN FUTURE TIME.
+
+\subsection*{Style references:}
+Include images of similar visual style.
 
 \end{document}
 

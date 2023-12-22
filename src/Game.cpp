@@ -34,13 +34,16 @@ Game::init()
     // music.setVolume(60);
     // music.setLoop(true);
     // music.play();
+    // 
+
+    // CREATE A BLACK SCREEN USING SHADERS
     
     currentScene = new Scene();
     //currentScene = new Scene(settings.levels[i].c_str());
-    // currentScene->camera.setViewPerspectiveLocation(RENDERER.getUniformLocation("VP"));
-    // currentScene->camera.setPosLoaction(RENDERER.getUniformLocation("observerPos"));
-    // GameObject::setModelLocation(RENDERER.getUniformLocation("M"));
-    // Material::setUniformsLocation(RENDERER.getMainShader());
+    currentScene->camera.setViewPerspectiveLocation(RENDERER.getUniformLocation("transformation"));
+    currentScene->camera.setPosLoaction(RENDERER.getUniformLocation("cameraPos"));
+    GameObject::setModelLocation(RENDERER.getUniformLocation("modelMatrix"));
+    Material::setUniformsLocation(RENDERER.getMainShader());
     // currentScene->lights[0].toggle();
 
     assert(glGetError() == 0);

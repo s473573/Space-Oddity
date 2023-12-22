@@ -35,9 +35,11 @@ Renderer::init()
     glEnable(GL_CULL_FACE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // mainShader = loadShaderProgram("shaders/main.vert", "shaders/main.frag");
-    // glUseProgram(mainShader);
+    mainShader = loadShaderProgram("shaders/main.vert", "shaders/main.frag");
+    glUseProgram(mainShader);
+
     //shadelessLocation = getUniformLocation("shadeless");
+
     glUseProgram(0);
     // deal with HUD
     // HUD.setShaderProgram(loadShaderProgram("Shaders/hud.vert", "Shaders/hud.frag"));
@@ -45,35 +47,9 @@ Renderer::init()
     
     assert(glGetError() == 0);
 
-
     // move this to wherever is next the pipeline, load a window
     // loadModelToContext("./models/sphere.obj", sphereContext);
     // loadModelToContext("./models/spaceship.obj", shipContext);
-
-    // sunShader = shaderLoader.CreateProgram("shaders/shader_5_sun.vert", "shaders/shader_5_sun.frag");
-
-
-    // init(window);
-
-    // // inicjalizacja glfw
-    // glfwInit();
-    // // tworzenie okna za pomoca glfw
-    // GLFWwindow* window = glfwCreateWindow(500, 500, "Space Oddity", NULL, NULL);
-    // if (window == NULL)
-    // {
-    //     std::cout << "Failed to create GLFW window" << std::endl;
-    //     glfwTerminate();
-    //     return -1;
-    // }
-    // glfwMakeContextCurrent(window);
-    // 
-    // RENDERER.init();
-    // // uruchomienie glownej petli
-    // renderLoop(window);
-
-    // shutdown(window);
-    // glfwTerminate();
-    // return 0;
 }
 
 GLuint

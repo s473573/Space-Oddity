@@ -28,7 +28,7 @@ Game::init()
     // }
     // HUD.setStatus(LOADING);
     // HUD.draw();
-    // WINDOW.internal.display();
+    WINDOW.internal.display();
 
     // music.openFromFile(settings.levelsMusic[i]);
     // music.setVolume(60);
@@ -39,7 +39,7 @@ Game::init()
     // CREATE A BLACK SCREEN USING SHADERS
     
     currentScene = new Scene();
-    //currentScene = new Scene(settings.levels[i].c_str());
+    // //currentScene = new Scene(settings.levels[i].c_str());
     currentScene->camera.setViewPerspectiveLocation(RENDERER.getUniformLocation("transformation"));
     currentScene->camera.setPosLoaction(RENDERER.getUniformLocation("cameraPos"));
     GameObject::setModelLocation(RENDERER.getUniformLocation("modelMatrix"));
@@ -57,7 +57,7 @@ Game::init()
     start();
     // HUD.setStatus(ONGOING);
     //
-    //gameStatus = ONGOING;
+    gameStatus = ONGOING;
     return true;
 }
 void
@@ -139,18 +139,18 @@ Game::loop()
                 break;
             }
         }
-        // if (gameStatus == ONGOING)
-        // {
-        //     // PHYSICS.apply(currentScene, deltaTime);
-        //     update();
-        //     RENDERER.renderScene(currentScene);
-        //     deltaTime = clock.restart().asSeconds();
-        // }
-        // else
-        // {
-        //     //HUD.draw();
-        //     //RENDERER.renderScene(currentScene);
-        // }
+        if (gameStatus == ONGOING)
+        {
+            // PHYSICS.apply(currentScene, deltaTime);
+            update();
+            RENDERER.renderScene(currentScene);
+            // deltaTime = clock.restart().asSeconds();
+        }
+        else
+        {
+            //HUD.draw();
+            RENDERER.renderScene(currentScene);
+        }
     }
 }
 void

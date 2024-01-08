@@ -9,11 +9,11 @@ namespace so
         private:
             glm::vec3 position;
             glm::qua<double> rotation;
-            glm::vec3 scale;
+            glm::vec3 scaling;
         
         public:
             Transform(glm::vec3 position={0.0f, 0.0f, 0.0f},
-                        glm:qua<double> rotation=glm::qua<double>(1.0f, 0.0f, 0.0f, 0.0f),
+                        glm::qua<double> rotation=glm::qua<double>(1.0f, 0.0f, 0.0f, 0.0f),
                         glm::vec3 scale={1.0f, 1.0f, 1.0f});
 
             Transform(glm::vec3 position,
@@ -104,5 +104,5 @@ namespace so
              * \param scale The amount to scale, in global space.
              */
             void scale(glm::vec3 scale);
-    }
+    };
 }

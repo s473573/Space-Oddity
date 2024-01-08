@@ -110,8 +110,8 @@ Scene::Scene() : camera(45.0f)
 
     //     throw runtime_error("LEVEL JSON file was not found");
     // }
-    assert(glGetError() == 0);
-    Document json;
+    // assert(glGetError() == 0);
+    // Document json;
     // json.Parse(fileData.data(), fileData.size());
     // parseCamera(json["camera"].GetObject(), camera);
     // auto materials = parseMaterials(json["materials"].GetArray());

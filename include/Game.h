@@ -17,6 +17,7 @@
 #include <Scene.h>
 //include <Player.h>
 //include <Ant.h>
+#include "HUD.h"
 #define GAME so::Game::instance()
 /** \brief Shared game namespace, so -- Space Oddity
  */
@@ -70,7 +71,7 @@ namespace so
         Scene *currentScene;
         float deltaTime = 0.0f;
         /** \brief The ::currentScene Status.*/
-        //Status gameStatus;
+        Status gameStatus;
         //sf::Music music;
         //sf::SoundBuffer easterEggSoundBuffer;
         //sf::Sound easterEggSound;

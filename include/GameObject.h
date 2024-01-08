@@ -1,6 +1,9 @@
 #pragma once
 #include <Mesh.h>
 #include <glm/glm.hpp>
+#include "Material.h"
+#include "Transform.h"
+#include "AABB.h"
 
 namespace so
 {
@@ -11,10 +14,10 @@ namespace so
             GameObject *parent;
             std::vector<GameObject*> children;
             glm::mat4 transformMatrix;
-            // int classType;
-            // static GLuint modelLocation;
+            int classType;
+            static GLuint modelLocation;
             
-            void contructAABB();
+            void constructAABB();
             void recalculateAABB();
         
         public:
@@ -22,7 +25,7 @@ namespace so
             // Rigidbody rigidbody;
             Material material;
             AABB aabb;
-            std::vector<GameObject> getChildren();
+            std::vector<GameObject *> getChildren();
             bool isStatic;
             
 
@@ -53,7 +56,7 @@ namespace so
             glm::mat4 applyTransform();
             virtual void draw();
             
-            virtual void fixedUpdate(float deltatime);
+            // virtual void fixedUpdate(float deltatime);
             
             void addChild(GameObject *gameObject);
             
@@ -63,5 +66,5 @@ namespace so
             virtual void update() = 0;
             
             static void setModelLocation(GLuint location);
-    }
+    };
 }

@@ -44,8 +44,8 @@ mat4 GameObject::applyTransform()
 void GameObject::draw()
 {
 	material.apply();
-	transformationMat = applyTransform();
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, &transformationMat[0][0]);
+	transformMatrix = applyTransform();
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, &transformMatrix[0][0]);
 	recalculateAABB();
 	meshPtr->draw();
 }
@@ -104,7 +104,7 @@ void GameObject::constructAABB()
 }
 void GameObject::recalculateAABB()
 {
-	vec3 transformedBound = transformationMat * vec4(aabb.bounds[0], 1);
+	vec3 transformedBound = transformMatrix * vec4(aabb.bounds[0], 1);
 	aabb.backward = transformedBound.z;
 	aabb.forward = transformedBound.z;
 	aabb.down = transformedBound.y;
@@ -113,7 +113,7 @@ void GameObject::recalculateAABB()
 	aabb.left = transformedBound.x;
 	for (unsigned i = 0; i < 8; ++i)
 	{
-		transformedBound = transformationMat * vec4(aabb.bounds[i], 1);
+		transformedBound = transformMatrix * vec4(aabb.bounds[i], 1);
 		aabb.backward = glm::min(aabb.backward, transformedBound.z);
 		aabb.forward = glm::max(aabb.forward, transformedBound.z);
 		aabb.down = glm::min(aabb.down, transformedBound.y);

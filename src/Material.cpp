@@ -62,5 +62,5 @@ void Material::setUniformsLocation(GLuint program)
 	specularLoc = glGetUniformLocation(program, "material.specular");
 	shininessLoc = glGetUniformLocation(program, "material.shininess");
 	alphaLoc = glGetUniformLocation(program, "material.alpha");
-	assert(glGetError() == 0);
+	// assert(glGetError() == 0);
 }

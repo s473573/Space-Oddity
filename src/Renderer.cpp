@@ -13,57 +13,6 @@
 using namespace so;
 using namespace std;
 
-void checkGLError(const std::string& location) {
-    GLenum error = glGetError();
-    if (error != GL_NO_ERROR) {
-        std::cerr << "OpenGL error at " << location << ": ";
-        switch (error) {
-            case GL_INVALID_ENUM:      std::cerr << "GL_INVALID_ENUM";      break;
-            case GL_INVALID_VALUE:     std::cerr << "GL_INVALID_VALUE";     break;
-            case GL_INVALID_OPERATION: std::cerr << "GL_INVALID_OPERATION"; break;
-            case GL_STACK_OVERFLOW:    std::cerr << "GL_STACK_OVERFLOW";    break;
-            case GL_STACK_UNDERFLOW:   std::cerr << "GL_STACK_UNDERFLOW";   break;
-            case GL_OUT_OF_MEMORY:     std::cerr << "GL_OUT_OF_MEMORY";     break;
-            default:                   std::cerr << "Unknown error";        break;
-        }
-        std::cerr << std::endl;
-        assert(false); // You may want to handle this differently in a production environment
-    }
-}
-
-bool checkShaderCompilation(GLuint shader, const std::string& shaderName) {
-    GLint success;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-
-    if (!success) {
-        GLchar infoLog[512];
-        glGetShaderInfoLog(shader, sizeof(infoLog), nullptr, infoLog);
-
-        std::cerr << "Error: " << shaderName << " compilation failed.\n" << infoLog << std::endl;
-
-        return false;
-    }
-
-    return true;
-}
-
-bool
-checkProgramLinking(GLuint program, const std::string& programName) {
-    GLint success;
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-
-    if (!success) {
-        GLchar infoLog[512];
-        glGetProgramInfoLog(program, sizeof(infoLog), nullptr, infoLog);
-
-        std::cerr << "Error: " << programName << " linking failed.\n" << infoLog << std::endl;
-
-        return false;
-    }
-
-    return true;
-}
-
 Renderer::Renderer() {}
 Renderer
 &Renderer::instance()
@@ -87,20 +36,10 @@ Renderer::init()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // paths in accordance with running from build/ directory
-    mainShader = loadShaderProgram("../space oddity/shaders/shader_main.vert", "../space oddity/shaders/shader_main.frag");
-    
-    if (!checkShaderCompilation(mainShader, "Main Shader")) {
-        std::cerr << "Shader compilation error in main shader!" << std::endl;
-        exit(EXIT_FAILURE);
-    }
+    mainShader = loadShaderProgram("/Users/vertu/code/computer-graphics/space oddity/space oddity/shaders/shader_main.vert", "/Users/vertu/code/computer-graphics/space oddity/space oddity/shaders/shader_main.frag");
     
     glUseProgram(mainShader);
     
-    // if (!checkProgramLinking(mainShader, "Main Shader Program")) {
-    //     std::cerr << "Shader program linking error!" << std::endl;
-    //     exit(EXIT_FAILURE);
-    // }
-
     //shadelessLocation = getUniformLocation("shadeless");
 
     glUseProgram(0);

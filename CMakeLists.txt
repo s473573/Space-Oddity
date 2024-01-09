@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project(SpaceOddity)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 set(SFML_DIR "/usr/local/Cellar/sfml/2.6.1/lib/cmake/SFML")
 set(SFML_INCLUDE_DIRS "/usr/local/Cellar/sfml/2.6.1/include")
 find_package(GLEW REQUIRED)
@@ -42,3 +44,4 @@ target_link_libraries(spaceoddity PRIVATE
     ${ASSIMP_LIBRARIES}
 )
 target_compile_features(spaceoddity PRIVATE cxx_std_17)
+target_compile_definitions(spaceoddity PRIVATE DEBUG)

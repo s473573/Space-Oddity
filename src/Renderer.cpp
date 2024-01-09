@@ -62,7 +62,7 @@ void Renderer::renderScene(Scene *scene)
     // {
     //     scene->lights[i].update();
     // }
-    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // glUniform1i(shadelessLocation, 1);
     // scene->skybox.draw();
     // glUniform1i(shadelessLocation, 0);

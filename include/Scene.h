@@ -1,11 +1,10 @@
 #pragma once
+#include <vector>
+#include <fstream>
 #include <rapidjson/document.h>
 #include <GameObject.h>
 #include <Camera.h>
-// #include <StaticGO.h>
 // #include <Player.h>
-// #include <Ant.h>
-// #include <RagedAnt.h>
 // #include <Light.h>
 // #include <Skybox.h>
 namespace so
@@ -31,8 +30,7 @@ namespace so
          *
          * \param path The path of the scene file on the drive.
          */
-        //Scene(const char *path);
-        Scene();
+        Scene(const char *path);
         /** \brief Frees ::gameObjects instances from the heap.*/
         ~Scene();
         // std::vector<GameObject *> gameObjects;

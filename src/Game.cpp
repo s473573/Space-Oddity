@@ -38,7 +38,7 @@ Game::init()
 
     // CREATE A BLACK SCREEN USING SHADERS
     
-    currentScene = new Scene();
+    currentScene = new Scene("assets/scenes/main.json");
     // //currentScene = new Scene(settings.levels[i].c_str());
     currentScene->camera.setViewPerspectiveLocation(RENDERER.getUniformLocation("transformation"));
     currentScene->camera.setPosLoaction(RENDERER.getUniformLocation("cameraPos"));

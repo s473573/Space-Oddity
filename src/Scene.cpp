@@ -4,67 +4,60 @@ using namespace so;
 using namespace rapidjson;
 using namespace glm;
 
-vec3 parseVec(GenericArray<false, Value> array)
+static inline vec3 parseVec(GenericArray<false, Value> array)
 {
-    // TODO: Implement vector parsing
-    return vec3();
+    return {array[0].GetFloat(), array[1].GetFloat(), array[2].GetFloat()};
+}
+static inline vec4 parseVec4(GenericArray<false, Value> array)
+{
+    return {array[0].GetFloat(), array[1].GetFloat(),
+            array[2].GetFloat(), array[3].GetFloat()};
 }
 
-vec4 parseVec4(GenericArray<false, Value> array)
+static inline Transform parseTransform(GenericObject<false, Value> object)
 {
-    // TODO: Implement vec4 parsing
-    return vec4();
+    vec3 position = parseVec(object["position"].GetArray());
+    vec3 rotation = parseVec(object["rotation"].GetArray());
+    vec3 scale = parseVec(object["scale"].GetArray());
+    return Transform(position, rotation, scale);
 }
 
-// Transform parseTransform(GenericObject<false, Value> object)
-// {
-//     // TODO: Implement transform parsing
-//     return Transform();
-// }
-// 
-// // Boilerplate methods for parsing rigidbodies, cameras, materials, etc.
-// Rigidbody parseRigidbody(GenericObject<false, Value> object)
-// {
-//     // TODO: Implement rigidbody parsing
-//     return Rigidbody();
-// }
-
-static inline void parseCamera(GenericObject<false, Value> object, Camera &camera)
+static inline Material parseMaterial(GenericObject<false, Value> object)
 {
-    camera.setFOV(object["fov"].GetFloat(), false);
-    // camera.transform = parseTransform(object["transform"].GetObject());
-    // camera.rigidbody = parseRigidbody(object["rigidbody"].GetObject());
+    vec4 ambient = parseVec4(object["ambient"].GetArray());
+    vec4 diffuse = parseVec4(object["diffuse"].GetArray());
+    vec4 specular = parseVec4(object["specular"].GetArray());
+    float shininess = object["shininess"].GetFloat();
+    return Material(ambient, diffuse, specular, shininess);
+}
+static inline vector<Material> parseMaterials(GenericArray<false, Value> array)
+{
+    vector<Material> materials;
+    for (unsigned i = 0; i < array.Size(); ++i)
+    {
+        materials.push_back(parseMaterial(array[i].GetObject()));
+    }
+    return materials;
 }
 
-// Material parseMaterial(GenericObject<false, Value> object)
-// {
-//     // TODO: Implement material parsing
-//     return Material();
-// }
-// 
-// vector<Material> parseMaterials(GenericArray<false, Value> array)
-// {
-//     // TODO: Implement materials parsing
-//     return vector<Material>();
-// }
-// 
-Mesh parseMesh(GenericObject<false, Value> object)
+static inline Mesh parseMesh(GenericObject<false, Value> object)
 {
-    // TODO: Implement mesh parsing
-    return nullptr;
+    const char *path = object["path"].GetString();
+    const char *texturePath = nullptr;
+    if (object.HasMember("texture"))
+    {
+        texturePath = object["texture"].GetString();
+    }
+    if (object.HasMember("color"))
+    {
+        vec4 color = parseVec4(object["color"].GetArray());
+        return Mesh(path, color, texturePath);
+    }
+    else
+    {
+        return Mesh(path, texturePath);
+    }
 }
-// 
-// vector<shared_ptr<Mesh>> parseAnimation(GenericObject<false, Value> object)
-// {
-//     // TODO: Implement animation parsing
-//     return vector<shared_ptr<Mesh>>();
-// }
-// 
-// static inline vector<vector<shared_ptr<Mesh>>> parseAnimations(GenericArray<false, Value> array)
-// {
-//     return vector<vector<shader_ptr<Mesh>>>();
-// }
-
 static inline vector<shared_ptr<Mesh>> parseMeshes(GenericArray<false, Value> array)
 {
     vector<shared_ptr<Mesh>> meshes;
@@ -76,6 +69,23 @@ static inline vector<shared_ptr<Mesh>> parseMeshes(GenericArray<false, Value> ar
     }
     return meshes;
 }
+
+static inline void parseCamera(GenericObject<false, Value> object, Camera &camera)
+{
+    camera.setFOV(object["fov"].GetFloat(), false);
+    camera.transform = parseTransform(object["transform"].GetObject());
+}
+
+// vector<shared_ptr<Mesh>> parseAnimation(GenericObject<false, Value> object)
+// {
+//     // TODO: Implement animation parsing
+//     return vector<shared_ptr<Mesh>>();
+// }
+// 
+// static inline vector<vector<shared_ptr<Mesh>>> parseAnimations(GenericArray<false, Value> array)
+// {
+//     return vector<vector<shader_ptr<Mesh>>>();
+// }
 
 // static inline vector<GameObject *> parseGameObjects(GenericArray<false, Value> array,
 //                                                     const vector<shared_ptr<Mesh>> &meshes,
@@ -92,32 +102,30 @@ static inline vector<shared_ptr<Mesh>> parseMeshes(GenericArray<false, Value> ar
 //     return vector<Light>();
 // }
 
-//Scene::Scene(const char *path) : camera(45.0f)
-Scene::Scene() : camera(45.0f)
+Scene::Scene(const char *path) : camera(45.0f)
 {
-    // fstream sceneStream(path, ios::ate | ios::in);
-    // vector<char> fileData;
-    // if (sceneStream.is_open())
-    // {
-    //     fileData.resize(sceneStream.tellg());
-    //     sceneStream.seekg(0, ios::beg);
-    //     sceneStream.read(fileData.data(), fileData.size());
-    //     sceneStream.flush();
-    //     sceneStream.close();
-    // }
-    // else
-    // {
-
-    //     throw runtime_error("LEVEL JSON file was not found");
-    // }
-    // assert(glGetError() == 0);
-    // Document json;
-    // json.Parse(fileData.data(), fileData.size());
-    // parseCamera(json["camera"].GetObject(), camera);
-    // auto materials = parseMaterials(json["materials"].GetArray());
-    // auto meshes = parseMeshes(json["meshes"].GetArray());
+    fstream sceneStream(path, ios::ate | ios::in);
+    vector<char> fileData;
+    if (sceneStream.is_open())
+    {
+        fileData.resize(sceneStream.tellg());
+        sceneStream.seekg(0, ios::beg);
+        sceneStream.read(fileData.data(), fileData.size());
+        sceneStream.flush();
+        sceneStream.close();
+    }
+    else
+    {
+        throw runtime_error("LEVEL JSON file was not found");
+    }
+    assert(glGetError() == 0);
+    Document json;
+    json.Parse(fileData.data(), fileData.size());
+    parseCamera(json["camera"].GetObject(), camera);
+    auto materials = parseMaterials(json["materials"].GetArray());
+    auto meshes = parseMeshes(json["meshes"].GetArray());
     // auto animations = parseAnimations(json["animations"].GetArray());
-    // auto meshesNAnimations = meshes;
+    auto meshesNAnimations = meshes;
     // for (int i = 0; i < animations.size(); ++i)
     // {
     //     for (int j = 0; j < animations[i].size(); ++j)
@@ -125,12 +133,12 @@ Scene::Scene() : camera(45.0f)
     //         meshesNAnimations.push_back(animations[i][j]);
     //     }
     // }
-    ////if (json.HasMember("skybox"))
-    ////{
-    ////    skybox = Skybox(&camera, json["skybox"].GetString());
-    ////    //meshesNAnimations.push_back(skybox.getMesh());
-    ////}
-    ////Mesh::constructVAO(meshesNAnimations);
+    // if (json.HasMember("skybox"))
+    // {
+    //     skybox = Skybox(&camera, json["skybox"].GetString());
+    //     //meshesNAnimations.push_back(skybox.getMesh());
+    // }
+    Mesh::constructVAO(meshesNAnimations);
     // auto mapMinLimitData = json["mapMinLimit"].GetArray();
     // auto mapMaxLimitData = json["mapMaxLimit"].GetArray();
     // vec2 mapMinLimit = {mapMinLimitData[0].GetFloat(), mapMinLimitData[1].GetFloat()};

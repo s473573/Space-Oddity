@@ -1,7 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <Window.h>
-// #include <Transform.h>
+#include <Transform.h>
 // #include <Rigidbody.h>
 #include <GameObject.h>
 
@@ -25,7 +25,7 @@ namespace so
     GLint viewPerspectiveLocation, posLocation;
 
   public:
-    // Transform transform;
+    Transform transform;
     // Rigidbody rigidbody;
 
     /** \brief Calculates ::aspectRatio using Window size.

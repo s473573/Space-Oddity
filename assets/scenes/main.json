@@ -1,0 +1,138 @@
+{
+    "mapMinLimit": [
+        -200,
+        -200
+    ],
+    "mapMaxLimit": [
+        200,
+        200
+    ],
+    "camera": {
+        "fov": 45.0,
+        "transform": {
+            "position": [
+                0,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "meshes": [
+        {
+            "path": "./Assets/Models/modelka.glb",
+            "texture": "Assets/Textures/texturka.png",
+            "color": [
+                1,
+                1,
+                1,
+                1
+            ]
+        }
+    ],
+    "lights": [
+        {
+            "class": 0,
+            "ambient": [
+                0.2,
+                0.2,
+                0.2,
+                1
+            ],
+            "diffuse": [
+                0.9,
+                0.9,
+                0.9,
+                1
+            ],
+            "specular": [
+                0.6,
+                0.6,
+                0.6,
+                1
+            ],
+            "direction": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ],
+    "materials": [
+        {
+            "ambient": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "diffuse": [
+                0.6,
+                0.6,
+                0.6,
+                1.0
+            ],
+            "specular": [
+                0.3,
+                0.3,
+                0.3,
+                1.0
+            ],
+            "shininess": 2.0
+        },
+        {
+            "ambient": [
+                0.2,
+                0.2,
+                0.2,
+                1.0
+            ],
+            "diffuse": [
+                0.4,
+                0.4,
+                0.4,
+                1.0
+            ],
+            "specular": [
+                0.9,
+                0.9,
+                0.9,
+                1.0
+            ],
+            "shininess": 120.0
+        }
+    ],
+    "gameobjects": [
+        {
+            "class": 1,
+            "transform": {
+                "position": [
+                    0,
+                    0,
+                    0
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ]
+            },
+            "mesh": 3,
+            "parent": 0
+        }
+    ]
+}
